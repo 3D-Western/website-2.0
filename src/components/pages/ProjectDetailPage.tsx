@@ -8,6 +8,7 @@ import { ArrowLeft, Users, Calendar, Code2, FileText } from "lucide-react";
 import type { Project } from "@/types/content";
 import { ProjectGallery } from "@/components/content/ProjectGallery";
 import ProjectShowcaseCard from "@/components/content/ProjectShowcaseCard";
+import { RelatedItemsSection } from "@/components/content/RelatedItemsSection";
 import { formatLongDate } from "../utils";
 
 type ProjectDetailPageProps = {
@@ -152,18 +153,13 @@ export function ProjectDetailPage({
 
       {/* Related projects */}
       {related.length > 0 && (
-        <section className="py-16 bg-black-bg border-t border-b-grey">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className={`text-2xl mb-8 `}>
-              More Projects
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {related.map((p) => (
-                <ProjectShowcaseCard key={p.id} project={p} className="bg-grey-bg"/>
-              ))}
-            </div>
+        <RelatedItemsSection title="More Projects">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {related.map((p) => (
+              <ProjectShowcaseCard key={p.id} project={p} className="bg-grey-bg" />
+            ))}
           </div>
-        </section>
+        </RelatedItemsSection>
       )}
     </main>
   );

@@ -35,9 +35,14 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/logo.ico",
-    shortcut: "/logo.ico", // TODO: replace with new logo.png if needed; otherwise stick to favicon
-    apple: "/logo.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   robots: {
     index: true,

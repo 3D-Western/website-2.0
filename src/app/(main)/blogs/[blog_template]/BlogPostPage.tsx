@@ -8,6 +8,8 @@ import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import type { BlogPost } from "@/types/content";
 import { notFound } from "next/navigation";
 import { formatShortDate } from "@/components/utils";
+import { BlogGrid } from "@/components/content/BlogGrid";
+import { RelatedItemsSection } from "@/components/content/RelatedItemsSection";
 
 // ---------------------------------------------------------------------------
 // Page component
@@ -15,10 +17,19 @@ import { formatShortDate } from "@/components/utils";
 interface BlogPostPageProps {
   post: BlogPost | null;
   slug: string;
+  allPosts?: BlogPost[];
 }
 
-export function BlogPostPage({ post }: BlogPostPageProps) {
+export function BlogPostPage({ post, allPosts = [] }: BlogPostPageProps) {
   if (!post) notFound();
+
+  const related = allPosts
+    .filter(
+      (p) =>
+        p.id !== post.id &&
+        post.tags?.some((tag) => p.tags?.some((t) => t.id === tag.id)),
+    )
+    .slice(0, 3);
   return (
     <main className="min-h-screen">
       {/* ── Header ── */}
@@ -122,6 +133,13 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
           </motion.div>
         </div>
       </section>
+
+      {/* ── Related posts ── */}
+      {related.length > 0 && (
+        <RelatedItemsSection title="More From The Blog">
+          <BlogGrid posts={related} />
+        </RelatedItemsSection>
+      )}
     </main>
   );
 }
