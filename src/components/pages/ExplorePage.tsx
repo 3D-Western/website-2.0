@@ -25,7 +25,10 @@ export function ExplorePage() {
           <StudentSection spotlights={spotlights ?? []} />
         )}
       />
-      <SocialsSection />
+      <DataSection
+        fetchers={{ posts: () => api.for("instagram-posts").getMany() }}
+        renderer={({ posts }) => <SocialsSection posts={posts ?? []} />}
+      />
       <SponsorSection />
     </main>
   );

@@ -84,7 +84,7 @@ export function LatestSection({ post, projects }: LatestSectionProps) {
               >
                 <div className="relative aspect-4/3 w-full overflow-hidden">
                   <Image
-                    src={project.image.src}
+                    src={project.image.url}
                     alt={project.image.alt}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"

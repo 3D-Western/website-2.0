@@ -2,11 +2,11 @@ import { Avatar, Image, ProjectImage } from "@/types/content";
 
 export const sampleGalleryImages: ProjectImage[] = [
   {
-    src: "/samples/smaker.jpg",
+    url: "/samples/smaker.jpg",
     alt: "Sabourin Makerspace",
   },
   {
-    src: "/samples/dmaker.jpg",
+    url: "/samples/dmaker.jpg",
     alt: "Digital Makerspace",
   },
 ];

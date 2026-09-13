@@ -1,8 +1,8 @@
 {
   "crons": [
     {
-      "path": "/api/cron/update-event-status",
-      "schedule": "0 6 * * *"
+      "path": "/api/cron/update-instagram-posts",
+      "schedule": "0 0 * * *"
     }
   ]
 }

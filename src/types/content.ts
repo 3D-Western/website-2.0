@@ -88,7 +88,7 @@ export type ProjectCategory = {
 };
 
 export type ProjectImage = {
-  src: string;
+  url: string;
   alt: string;
 };
 
@@ -147,3 +147,13 @@ export type Announcement = {
   announcement: DefaultTypedEditorState;
   createdAt: string;
 };
+
+export interface InstagramPost {
+  id: string;
+  username: string;
+  avatar?: Image; // profile picture URL, falls back to a monogram if omitted
+  image?: Image; // post photo URL, falls back to a placeholder graphic if omitted
+  caption?: string;
+  likes?: number;
+  permalink: string; // link to the real post on instagram.com
+}

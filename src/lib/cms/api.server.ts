@@ -9,8 +9,9 @@ import { cmsEnabledFallback, whereFromSearchParams } from "./utils";
 // Get function for the SERVER ONLY
 // Fetches through Payloads Local API (Only available on the server)
 export async function findDocs(slug: string, qs: string) {
-  const fallback = await cmsEnabledFallback(`${slug}?${qs}`);
-  if (fallback !== null) return fallback;
+  const fallback = await cmsEnabledFallback(`/api/${slug}?${qs}`);
+  if (fallback.status === "ok" || fallback.status === "not-found")
+    return fallback.response ?? [];
 
   const params = new URLSearchParams(qs);
   const payload = await getPayload({ config });

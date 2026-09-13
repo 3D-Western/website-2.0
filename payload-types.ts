@@ -85,6 +85,8 @@ export interface Config {
     teams: Team;
     spotlights: Spotlight;
     announcements: Announcement;
+    'instagram-posts': InstagramPost;
+    'instagram-thumbnails': InstagramThumbnail;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -110,6 +112,8 @@ export interface Config {
     teams: TeamsSelect<false> | TeamsSelect<true>;
     spotlights: SpotlightsSelect<false> | SpotlightsSelect<true>;
     announcements: AnnouncementsSelect<false> | AnnouncementsSelect<true>;
+    'instagram-posts': InstagramPostsSelect<false> | InstagramPostsSelect<true>;
+    'instagram-thumbnails': InstagramThumbnailsSelect<false> | InstagramThumbnailsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -175,6 +179,8 @@ export interface User {
         | 'gallery-images'
         | 'spotlights'
         | 'spotlight-images'
+        | 'instagram-posts'
+        | 'instagram-thumbnails'
       )[]
     | null;
   updatedAt: string;
@@ -579,6 +585,51 @@ export interface Announcement {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "instagram-posts".
+ */
+export interface InstagramPost {
+  id: number;
+  username: string;
+  avatar?: (number | null) | Avatar;
+  postImage?: (number | null) | InstagramThumbnail;
+  caption?: string | null;
+  likes?: number | null;
+  permalink: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "instagram-thumbnails".
+ */
+export interface InstagramThumbnail {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -672,6 +723,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'announcements';
         value: number | Announcement;
+      } | null)
+    | ({
+        relationTo: 'instagram-posts';
+        value: number | InstagramPost;
+      } | null)
+    | ({
+        relationTo: 'instagram-thumbnails';
+        value: number | InstagramThumbnail;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1079,6 +1138,55 @@ export interface AnnouncementsSelect<T extends boolean = true> {
   announcement?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "instagram-posts_select".
+ */
+export interface InstagramPostsSelect<T extends boolean = true> {
+  id?: T;
+  username?: T;
+  avatar?: T;
+  postImage?: T;
+  caption?: T;
+  likes?: T;
+  permalink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "instagram-thumbnails_select".
+ */
+export interface InstagramThumbnailsSelect<T extends boolean = true> {
+  id?: T;
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

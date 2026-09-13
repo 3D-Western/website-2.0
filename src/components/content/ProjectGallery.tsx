@@ -59,7 +59,7 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
       >
         {images.map((image, i) => (
           <button
-            key={image.src + i}
+            key={image.url + i}
             ref={(el) => {
               triggerRefs.current[i] = el;
             }}
@@ -73,7 +73,7 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
             }`}
           >
             <Image
-              src={image.src}
+              src={image.url}
               alt={`${image.alt}, image ${i + 1} of ${images.length}`}
               fill
               className="object-cover hover:scale-105 transition-transform duration-500"
@@ -132,7 +132,7 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={images[activeIndex].src}
+                src={images[activeIndex].url}
                 alt={`${images[activeIndex].alt}, image ${activeIndex + 1} of ${images.length}`}
                 fill
                 className="object-contain"

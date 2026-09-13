@@ -31,7 +31,7 @@ export function FeaturedProjectSpotlight({
       >
         <div className="relative h-56 md:h-full min-h-70 overflow-hidden">
           <Image
-            src={project.image.src}
+            src={project.image.url}
             alt={project.image.alt}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"

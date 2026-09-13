@@ -6,12 +6,17 @@ import { Author as PayloadAuthor } from "../../payload-types";
 import { sampleProjectCategories } from "@/cms/static-data/projectCategories";
 import { sampleProjects } from "@/cms/static-data/projects";
 import { sampleEvents } from "@/cms/static-data/events";
-import { sampleEventCategories } from "@/cms/static-data";
+import {
+  sampleAnnouncements,
+  sampleEventCategories,
+  sampleSpotlights,
+} from "@/cms/static-data";
 import {
   sampleAvatars,
   sampleCoverImages,
   sampleGalleryImages,
 } from "@/cms/static-data/media";
+import { sampleInstagramPosts } from "@/cms/static-data/instagramPosts";
 
 export interface ResponsePayload {
   docs: unknown[];
@@ -126,63 +131,25 @@ export function resolveProjectCategories(): ResponsePayload {
   };
 }
 
-// Placeholder Student Spotlight data for local/dev (CMS disabled). Same
-// spirit as the other sample data — swap for real entries via the CMS.
-const sampleSpotlights = [
-  {
-    id: 1,
-    name: "Ava Chen",
-    projectName: "Foldable Cargo Bike Frame",
-    description:
-      "A collapsible cargo bike frame designed for small apartments, built from CNC-cut aluminium plate and 3D-printed jigs. Went through five weld-fixture revisions in the Sabourin Makerspace before the geometry held up under load.",
-    tags: ["CNC", "Welding"],
-    image: {
-      url: "/images/workshop1.webp",
-      alt: "Ava Chen's foldable cargo bike frame",
-    },
-    program: "Mechatronic Systems Engineering",
-    year: 3,
-    quote:
-      "I walked in not knowing how to weld. Two months later I had a frame that actually carries groceries.",
-  },
-  {
-    id: 2,
-    name: "Diego Fernandez",
-    projectName: "Braille Label Printer",
-    description:
-      "A low-cost desktop printer that embosses Braille labels, using a laser-cut chassis and a custom solenoid head. Built for a campus accessibility club and now used to label lab equipment across two buildings.",
-    tags: ["Laser Cutting", "Electronics"],
-    image: {
-      url: "/images/workshop2.webp",
-      alt: "Diego Fernandez's Braille label printer",
-    },
-    program: "Electrical Engineering",
-    year: 4,
-    quote:
-      "The makerspace let me fail cheaply. I burned through a lot of acrylic before the head alignment worked.",
-  },
-  {
-    id: 3,
-    name: "Priya Nair",
-    projectName: "Modular Hydroponics Wall",
-    description:
-      "A wall-mounted hydroponics system with snap-together 3D-printed modules and a sensor board that logs pH and nutrient levels. Started as a first-year side project and grew into a demo piece for makerspace tours.",
-    tags: ["3D Printing", "IoT"],
-    image: {
-      url: "/images/print_workshop.webp",
-      alt: "Priya Nair's modular hydroponics wall",
-    },
-    program: "Chemical Engineering",
-    year: 2,
-    quote:
-      "Everything I know about rapid prototyping I learned from other students on shift here.",
-  },
-];
-
 export function resolveSpotlights(): ResponsePayload {
+  const resolvedSpotlights = sampleSpotlights.map((spotlight) => ({
+    ...spotlight,
+    image: sampleCoverImages[(spotlight.image as unknown as number) - 1],
+  }));
+
   return {
-    docs: sampleSpotlights,
-    totalDocs: sampleSpotlights.length,
+    docs: resolvedSpotlights,
+    totalDocs: resolvedSpotlights.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
+}
+
+export function resolveAnnouncements(): ResponsePayload {
+  return {
+    docs: sampleAnnouncements,
+    totalDocs: sampleAnnouncements.length,
     limit: 10,
     page: 1,
     totalPages: 1,
@@ -354,6 +321,16 @@ export function resolveTeamMembers(params?: URLSearchParams) {
   return {
     docs,
     totalDocs: docs.length,
+    limit: 10,
+    page: 1,
+    totalPages: 1,
+  };
+}
+
+export function resolveInstaPosts() {
+  return {
+    docs: sampleInstagramPosts,
+    totalDocs: sampleInstagramPosts.length,
     limit: 10,
     page: 1,
     totalPages: 1,

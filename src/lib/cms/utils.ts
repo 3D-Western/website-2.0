@@ -14,13 +14,15 @@ export const cmsEnabledFallback = async (
   path: string,
   options?: RequestInit,
 ) => {
-  if (!CMSEnabled) {
+  if (process.env.NEXT_PUBLIC_CMS_ENABLED === "false") {
     const { getMockResponse } = await import("@/mocks/handlers-direct");
     const res = await getMockResponse(path, options);
     if (!res.ok) throw new Error(`Mock CMS request failed: ${res.status}`);
-    return res.json();
+    const resolved = await res.json();
+    if (!resolved) return { status: "not-found", response: resolved };
+    return { response: resolved, status: "ok" };
   }
-  return null;
+  return { response: null, status: "CMS Enabled" };
 };
 
 export function coerceValue(value: string) {

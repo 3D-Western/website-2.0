@@ -2,22 +2,22 @@ import { draftMode } from "next/headers";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { transformBlog, transformProject } from "./transform";
-import { CMSEnabled } from "./utils";
-import { findDocs } from "./api.server";
+import { cmsEnabledFallback } from "./utils";
 
 async function findBySlug(
   collection: "projects" | "blogs",
   slug: string,
   draft: boolean,
 ) {
-  if (!CMSEnabled()) {
-    const params = new URLSearchParams({
-      "where[slug][equals]": slug,
-      depth: "2",
-    });
-    if (draft) params.set("draft", "true");
-    return findDocs(collection, params.toString());
-  }
+  const params = new URLSearchParams({
+    "where[slug][equals]": slug,
+    depth: "2",
+  });
+  const fallback = await cmsEnabledFallback(
+    `/api/${collection}?${params.toString()}`,
+  );
+  if (fallback.status === "ok" || fallback.status === "not-found")
+    return fallback.response ?? [];
 
   const payload = await getPayload({ config });
   return payload.find({

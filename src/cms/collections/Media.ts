@@ -170,3 +170,41 @@ export const SporlightImages: CollectionConfig = {
     },
   ],
 };
+
+export const INSTATHUMBNAIL_SLUG = "instagram-thumbnails";
+
+export const InstagramThumbnails: CollectionConfig = {
+  slug: INSTATHUMBNAIL_SLUG,
+  access: generalAccess(INSTATHUMBNAIL_SLUG),
+  versions: {
+    drafts: true,
+  },
+  admin: {
+    group: "Instagram",
+    useAsTitle: "id",
+  },
+  upload: {
+    disableLocalStorage: true,
+    imageSizes: [
+      {
+        name: "thumbnail",
+        width: 1000,
+        height: 1000,
+        position: "center",
+        fit: "cover",
+      },
+    ],
+  },
+  fields: [
+    {
+      name: "id",
+      type: "number",
+      required: true,
+    },
+    {
+      name: "alt",
+      type: "text",
+      required: true,
+    },
+  ],
+};

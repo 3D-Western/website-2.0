@@ -23,7 +23,9 @@ import {
   Spotlights,
   Announcements,
   Tags,
+  InstagramThumbnails,
 } from "@/cms/collections";
+import { InstagramPosts } from "@/cms/collections/InstagramPost";
 
 export default buildConfig({
   editor: lexicalEditor({}),
@@ -46,6 +48,8 @@ export default buildConfig({
     Teams,
     Spotlights,
     Announcements,
+    InstagramPosts,
+    InstagramThumbnails,
   ],
 
   plugins: [
@@ -56,6 +60,7 @@ export default buildConfig({
         "cover-images": true,
         "gallery-images": true,
         "spotlight-images": true,
+        "instagram-thumbnails": true,
       },
       bucket: process.env.SUPABASE_BUCKET ?? "",
       config: {
@@ -74,6 +79,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.CMS_DATABASE_URI,
     },
+    push: false,
   }),
   routes: {
     admin: "/admin",

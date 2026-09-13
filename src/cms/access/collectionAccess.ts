@@ -18,6 +18,8 @@ export const assignableCollections = [
   { label: "Gallery Images", slug: "gallery-images" },
   { label: "Spotlights", slug: "spotlights" },
   { label: "Spotlight Images", slug: "spotlight-images" },
+  { label: "Instagram Posts", slug: "instagram-posts" },
+  { label: "Instagram Thumbnail", slug: "instagram-thumbnails" },
 ] as const;
 
 export type AssignableCollection =

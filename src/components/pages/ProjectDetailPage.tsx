@@ -78,9 +78,7 @@ export function ProjectDetailPage({
           <div className="flex flex-wrap items-center gap-5 text-sm text-secondary-text">
             <div className="flex items-center gap-1.5">
               <Users className="w-4 h-4" aria-hidden="true" />
-              <span className="font-medium">
-                {contributors.join(", ")}
-              </span>
+              <span className="font-medium">{contributors.join(", ")}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" aria-hidden="true" />
@@ -96,7 +94,7 @@ export function ProjectDetailPage({
       <div className="bg-black-bg">
         <div className="relative w-full aspect-21/9 max-h-[400px] overflow-hidden">
           <Image
-            src={project.image.src}
+            src={project.image.url}
             alt={project.image.alt}
             fill
             className="object-cover"
@@ -153,11 +151,26 @@ export function ProjectDetailPage({
 
       {/* Related projects */}
       {related.length > 0 && (
+<<<<<<< HEAD
         <RelatedItemsSection title="More Projects">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {related.map((p) => (
               <ProjectShowcaseCard key={p.id} project={p} className="bg-grey-bg" />
             ))}
+=======
+        <section className="py-16 bg-black-bg border-t border-b-grey">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className={`text-2xl mb-8 `}>More Projects</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {related.map((p) => (
+                <ProjectShowcaseCard
+                  key={p.id}
+                  project={p}
+                  className="bg-grey-bg"
+                />
+              ))}
+            </div>
+>>>>>>> 2071fe94d4720cc2c023e519ed966895a6bcde0c
           </div>
         </RelatedItemsSection>
       )}

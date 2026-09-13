@@ -44,7 +44,7 @@ const ProjectShowcaseCard = ({
         >
           <div className="relative aspect-3/2 shrink-0 overflow-hidden">
             <Image
-              src={project.image.src}
+              src={project.image.url}
               alt={project.image.alt}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

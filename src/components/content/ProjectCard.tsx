@@ -17,7 +17,7 @@ const ProjectCard = ({ project, className }: ProjectCardProps) => {
       )}
     >
       <Image
-        src={project.image.src}
+        src={project.image.url}
         alt={project.image.alt}
         width={400}
         height={256}

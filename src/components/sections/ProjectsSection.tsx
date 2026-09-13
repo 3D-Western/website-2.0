@@ -46,7 +46,12 @@ const ProjectsSection = () => {
         </div>
       ) : (
         <div className="px-4 sm:px-6 lg:px-8">
-          <Button className="w-fit m-auto" size="pill" variant="outlined" asChild>
+          <Button
+            className="w-fit m-auto"
+            size="pill"
+            variant="outlined"
+            asChild
+          >
             <Link href="/projects">
               No projects found, visit our projects page for more information.
             </Link>

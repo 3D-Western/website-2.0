@@ -7,8 +7,8 @@ import { BASE_URL, cmsEnabledFallback } from "./utils";
 // Get function for the client ONLY
 // Fetches over REST API
 export const clientGet = async (path: string) => {
-  const fallback = await cmsEnabledFallback(`${path}`);
-  if (fallback !== null) return fallback;
+  const fallback = await cmsEnabledFallback(path);
+  if (fallback.status === "ok") return fallback.response;
 
   const res = await fetch(`${BASE_URL}${path}`);
   if (!res.ok) throw new Error(`CMS request failed: ${res.status}`);
