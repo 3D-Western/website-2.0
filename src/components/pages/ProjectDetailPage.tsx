@@ -151,26 +151,11 @@ export function ProjectDetailPage({
 
       {/* Related projects */}
       {related.length > 0 && (
-<<<<<<< HEAD
         <RelatedItemsSection title="More Projects">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {related.map((p) => (
               <ProjectShowcaseCard key={p.id} project={p} className="bg-grey-bg" />
             ))}
-=======
-        <section className="py-16 bg-black-bg border-t border-b-grey">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className={`text-2xl mb-8 `}>More Projects</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {related.map((p) => (
-                <ProjectShowcaseCard
-                  key={p.id}
-                  project={p}
-                  className="bg-grey-bg"
-                />
-              ))}
-            </div>
->>>>>>> 2071fe94d4720cc2c023e519ed966895a6bcde0c
           </div>
         </RelatedItemsSection>
       )}
