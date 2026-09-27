@@ -6,6 +6,7 @@ import { MapPin, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { spaces } from "@/components/data/spaces";
 import { Button } from "../ui/button";
+import { DASHBOARD_TRAINING_URL } from "@/components/data/links";
 
 export function MakerspacesSection() {
   return (
@@ -99,12 +100,12 @@ export function MakerspacesSection() {
           className="mt-14 flex flex-col items-center gap-5 text-center lg:mt-16"
         >
           <p className="text-[15px] text-secondary-text sm:text-base">
-            Complete level 1 training on our OWL course to access the
-            Makerspaces.
+            Create a 3D Western account and complete Level 1 training to
+            access the Makerspaces.
           </p>
           <Button variant="gradient" size="pill" asChild>
             <Link
-            href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" target="_blank"
+            href={DASHBOARD_TRAINING_URL} target="_blank"
                 rel="noopener noreferrer">
             Access Training
           </Link>

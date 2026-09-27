@@ -84,7 +84,7 @@ export function AboutInfoSection() {
 						</p>
 						<p className="text-primary-text/80">
 							Students can access our equipment in the Sabourin Makerspace
-							after completing Level 1 training on OWL, with a growing
+							after completing Level 1 training, with a growing
 							inventory of digital fabrication and woodworking tools.
 						</p>
 						<div className="flex flex-wrap gap-2 mt-2">

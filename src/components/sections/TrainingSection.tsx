@@ -6,14 +6,13 @@ import { Badge } from '@/components/ui/badge';
 import { Cuboid, Shield, Zap, Hammer, ExternalLink, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+import { CALENDAR_URL, DASHBOARD_TRAINING_URL } from '@/components/data/links';
 
 const fadeUp = {
 	initial: { opacity: 0, y: 24 },
 	whileInView: { opacity: 1, y: 0 },
 	viewport: { once: true, margin: '-60px' },
 } as const;
-
-const OWL_URL = "https://westernu.brightspace.com/d2l/le/discovery/view/course/151344";
 
 const levelOne = {
 	title: "Level 1: Makerspace Access",
@@ -56,7 +55,7 @@ const specializedTrainings = [
 	},
 ];
 
-const steps = ["Register on OWL", "Complete Level 1", "Choose Certification"];
+const steps = ["Create a 3DW Account", "Complete Level 1", "Choose Certification"];
 
 function Chip({ children }: { children: React.ReactNode }) {
 	return (
@@ -102,8 +101,8 @@ export function TrainingSection() {
 							</div>
 						</div>
 						<Button asChild variant="gradient" size="pill" className="gap-2 w-full md:w-auto">
-							<Link href={OWL_URL} target="_blank" rel="noopener noreferrer">
-								Register on OWL <ExternalLink size={16} />
+							<Link href={DASHBOARD_TRAINING_URL} target="_blank" rel="noopener noreferrer">
+								Register with Us <ExternalLink size={16} />
 							</Link>
 						</Button>
 					</div>
@@ -143,8 +142,8 @@ export function TrainingSection() {
 										))}
 									</div>
 									<Button asChild variant="outlined" size="pill" className="w-full gap-2 mt-auto">
-										<Link href={OWL_URL} target="_blank" rel="noopener noreferrer">
-											Register on OWL <ExternalLink size={16} />
+										<Link href={DASHBOARD_TRAINING_URL} target="_blank" rel="noopener noreferrer">
+											Start Training <ExternalLink size={16} />
 										</Link>
 									</Button>
 								</CardContent>
@@ -161,7 +160,7 @@ export function TrainingSection() {
 								Ready to Get Started?
 							</span>
 						</h3>
-						<p className="text-secondary-text max-w-2xl mx-auto">All trainings are available on OWL.</p>
+						<p className="text-secondary-text max-w-2xl mx-auto">Create a free 3D Western account to take all trainings through our dashboard. Check the calendar before you visit to see when each makerspace is open and which equipment is supervised.</p>
 					</div>
 					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-3 mb-8">
 						{steps.map((step, i) => (
@@ -180,8 +179,8 @@ export function TrainingSection() {
 					</div>
 					<div className="flex justify-center">
 						<Button asChild variant="gradient" size="pill" className="gap-2">
-							<Link href="#" target="_blank" rel="noopener noreferrer">
-								View Training Schedule <ExternalLink size={20} />
+							<Link href={CALENDAR_URL}>
+								View Calendar <ArrowRight size={20} />
 							</Link>
 						</Button>
 					</div>

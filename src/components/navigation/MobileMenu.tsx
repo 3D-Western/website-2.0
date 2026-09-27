@@ -5,6 +5,7 @@ import DashButton from "./DashButton";
 import NavLink from "./NavLink";
 import { Button } from "../ui/button";
 import { cn } from "../ui/utils";
+import { DASHBOARD_TRAINING_URL } from "@/components/data/links";
 
 interface MobileMenuProps {
   isActive: (path: string) => boolean;
@@ -47,7 +48,7 @@ export default function MobileMenu({ isActive, navLinks }: MobileMenuProps) {
           className="px-7 py-2.5 text-base"
         >
           <a
-            href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344"
+            href={DASHBOARD_TRAINING_URL}
             target="_blank"
             rel="noreferrer noopener"
           >

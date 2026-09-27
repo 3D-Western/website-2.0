@@ -3,6 +3,7 @@
 import { koulen } from '@/lib/fonts';
 import { CalendarSection } from '@/components/sections/CalendarSection';
 import { motion } from 'framer-motion';
+import { DASHBOARD_TRAINING_URL } from '@/components/data/links';
 
 
 export function MakerspacePage() {
@@ -26,8 +27,8 @@ export function MakerspacePage() {
 						className="space-y-1"
 					>
 						<li>
-							For Western students: Accessing the makerspace requires training on OWL, which you can access{' '}
-							<a href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344" target="_blank" rel="noopener noreferrer" className="underline font-semibold">here</a>.
+							For Western students: Accessing the makerspace requires Level 1 training through your 3D Western account, which you can start{' '}
+							<a href={DASHBOARD_TRAINING_URL} target="_blank" rel="noopener noreferrer" className="underline font-semibold">here</a>.
 						</li>
 						<li>
 							Are you an organization looking to use the makerspace?{' '}

@@ -11,6 +11,7 @@ import NavLink from "./NavLink";
 import Logo from "../Logo";
 import { navLinks } from "../data/navLinks";
 import { Button } from "../ui/button";
+import { DASHBOARD_TRAINING_URL } from "@/components/data/links";
 // Prevent scrolling via wheel, touch, and keyboard events
 const preventDefault = (e: Event) => {
   e.preventDefault();
@@ -83,7 +84,7 @@ export function NavBar() {
           <div className="hidden sm:flex gap-2">
             <Button variant="outlined" size="pill" asChild>
               <a
-                href="https://westernu.brightspace.com/d2l/le/discovery/view/course/151344"
+                href={DASHBOARD_TRAINING_URL}
                 target="_blank"
                 rel="noreferrer noopener"
               >

@@ -2,12 +2,12 @@ export const faqs = [
 	{
 		id: 1,
 		question: "How do I get access to the makerspaces?",
-		answer: "First, complete the Level 1 safety training available on OWL. This training covers general safety protocols and space guidelines. After completing this required training, you'll be able to access the makerspaces during open hours."
+		answer: "First, create a 3D Western account and complete the Level 1 safety training on our dashboard. This training covers general safety protocols and space guidelines. After completing this required training, you'll be able to access the makerspaces during open hours."
 	},
 	{
 		id: 2,
 		question: "Do I need special training to use the equipment?",
-		answer: "While Level 1 training grants you access to the spaces, you'll need specialized certifications to operate certain equipment like 3D printers, laser cutters, and power tools. These certifications are available through workshops listed on our training page."
+		answer: "While Level 1 training grants you access to the spaces, you'll need specialized certifications to operate certain equipment like 3D printers, laser cutters, and power tools. These certifications are available through the training page on our dashboard."
 	},
 	{
 		id: 3,

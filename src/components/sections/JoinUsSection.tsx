@@ -6,7 +6,10 @@ import { Button } from "../ui/button";
 
 export function JoinUsSection() {
   return (
-    <section className="relative w-full bg-[#0B0D10] px-6 py-32 lg:py-44">      {/* Center glow */}
+    // Clip only the top edge so the right oval doesn't paint over the Latest section,
+    // while the left oval can still bleed down into the footer
+    <section className="relative w-full bg-[#0B0D10] px-6 py-32 lg:py-44 [clip-path:inset(0_0_-2000px_0)]">
+      {/* Center glow */}
       <div
         className="pointer-events-none absolute top-1/2 left-1/2 h-[229px] w-[483px] -translate-x-1/2 -translate-y-1/2 lg:h-[457px] lg:w-[966px]"
         style={{

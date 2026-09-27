@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { MapPin, ArrowRight } from "lucide-react";
+import { MapPin } from "lucide-react";
 import type { EquipmentItem } from "@/components/data/equipment";
 
 const IMAGE_WIDTH = 260;
@@ -51,15 +50,6 @@ export function EquipmentCardDesktop({
             <MapPin className="h-3.5 w-3.5 shrink-0" />
             {item.location}
           </div>
-          <Link
-            href={item.href}
-            target={item.href.startsWith("http") ? "_blank" : undefined}
-            rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary-text hover:text-purple-light"
-          >
-            Book equipment
-            <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { TrainingSection } from "../archive/sections/TrainingSection";
+import { TrainingSection } from "../sections/TrainingSection";
 import PageHeader from "../content/Header";
 import { BigTextSection } from "../sections/BigTextSection";
 import { AboutInfoSection } from "../sections/AboutInfoSection";
