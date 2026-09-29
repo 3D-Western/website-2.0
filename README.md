@@ -1,14 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app)
 
-## Moving to pnpm 
+## Moving to pnpm
 
 If you have npm installed, run `npm install -g pnpm` or use corepack to install pnpm: `corepack enable`.
 Then remove `node_modules` in your project and run `pnpm install`. Approve all build scripts with `pnpm approve-builds`.
-
 Then run `pnpm dev` to start the server.
 
 ### pnpm commands
-- add a package: `pnpm add <packagename>`, add `-D` flag for dev dependencies 
+
+- add a package: `pnpm add <packagename>`, add `-D` flag for dev dependencies
 - remove a package: `pnpm remove <packagename>`
 - list packages: `pnpm list`
 
@@ -17,32 +17,144 @@ Then run `pnpm dev` to start the server.
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## CMS Setup (Payload)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
+
+- Node.js 18+
+- A PostgreSQL database (Optional — can run without with `CMS_ENABLED=false`)
+
+### Environment Variables
+
+Copy `.env.example` to `.env.local` and fill in the values:
+
+```env
+# Set to 'true' to use Payload CMS, 'false' to use mock data
+CMS_ENABLED=true
+
+# Required for Payload
+PAYLOAD_SECRET=your-secret-key
+CMS_BASE_URL=http://localhost:3000
+
+# Optional — only needed if CMS_ENABLED=true
+CMS_DATABASE_URI=postgres://user:password@localhost:5432/payload
+
+# Preview mode
+PREVIEW_SECRET=your-preview-secret
+```
+
+### Running with CMS Enabled
+
+```bash
+CMS_ENABLED=true pnpm dev
+```
+
+Payload admin panel will be available at `http://localhost:3000/admin`.
+
+On first run you will be prompted to create an admin user.
+
+#### Seeding the Database
+
+The database has initial data. To reseed:
+
+```bash
+pnpm seedcms
+```
+
+This will seed:
+
+- **Authors** — 4 sample authors
+- **Tags** — 5 sample tags
+- **Blogs** — 5 sample blog posts (linked to authors and tags)
+  (so far)
+
+### Running Without a Database (Local Development)
+
+```bash
+CMS_ENABLED=false pnpm dev
+```
+
+When `CMS_ENABLED=false`:
+
+- ✅ MSW (Mock Service Worker) intercepts all CMS API calls
+- ✅ Uses static sample data from `/src/cms/static-data/`
+- ✅ No database required
+- ✅ Admin panel is disabled and redirects to home
+- ✅ Full frontend development without DB setup
+
+#### Mock Data Structure
+
+Mock data is organized in:
+
+- `src/cms/static-data/blogs.ts` — Sample blog posts
+- `src/cms/static-data/tags.ts` — Sample tags
+- `src/cms/static-data/authors.ts` — Sample authors
+
+All use numeric IDs that match the database structure for seamless switching between modes.
+
+### Draft Preview Mode
+
+Both CMS and mock modes support draft preview:
+
+1. **Create a draft blog post** in the admin panel (or edit existing sample data)
+2. **Click "Preview"** — generates a preview link
+3. **Visit the preview link** — shows draft content (authenticated users only)
+
+Preview URL format:
+Draft mode requires:
+
+- Valid `PREVIEW_SECRET` environment variable
+- Authenticated user (via cookies)
+- Draft blog with matching slug
+
+### Collections
+
+- **Blogs** — Blog posts with authors, tags, and draft support
+- **Tags** — Content tags (max 5 per blog)
+- **Authors** — Blog post authors
+- **Users** — Payload authentication users
+- **Events** — Club events
+- **Projects** — Showcase projects
+- **Team Members** — Team member profiles
+- **Sponsors** — Sponsors
+
+## Development Workflow
+
+### With Database
+
+```bash
+CMS_ENABLED=true pnpm dev
+```
+
+- Full CMS functionality
+- Admin panel at `/admin`
+- Real database storage
+
+### Without Database
+
+```bash
+CMS_ENABLED=false pnpm dev
+```
+
+- Mock data via MSW
+- Admin panel disabled
+- Perfect for frontend-only work or when DB isn't available
+
+Switch between modes by changing `CMS_ENABLED` and restarting dev server.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about Next.js, check out the [Next.js Documentation](https://nextjs.org/docs).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For Payload CMS documentation, visit [payloadcms.com](https://payloadcms.com/docs).
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy is on [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Make sure to set `CMS_ENABLED=true` and provide database credentials in your Vercel environment variables for production.
