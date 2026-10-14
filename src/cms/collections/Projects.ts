@@ -42,6 +42,7 @@ export const Projects: CollectionConfig = {
       label: "All Contributors (Including Creator)",
     },
     { name: "description", type: "text", required: true },
+    { name: "content", type: "richText", required: true },
     {
       name: "image",
       type: "relationship",

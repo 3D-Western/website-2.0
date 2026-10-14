@@ -3,7 +3,6 @@
 import { Search, X } from "lucide-react";
 import CategoryPill from "./CategoryPill";
 import { useId } from "react";
-import { Button } from "../ui/button";
 
 type FilterOption = {
   name: string;

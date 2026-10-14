@@ -11,6 +11,36 @@ export const sampleProjects: SampleProject[] = [
     contributors: ["Emily Chen", "Raj Malhotra"],
     description:
       "A smart greenhouse system that monitors temperature, humidity, and soil moisture using custom-designed enclosures and sensors. The team iterated through four enclosure revisions to get IP-rated seals right, then built a small dashboard so club members could check on the plants remotely between shifts in the makerspace.",
+    content: {
+      root: {
+        type: "root",
+        direction: "ltr",
+        format: "",
+        indent: 0,
+        version: 1,
+        children: [
+          {
+            children: [
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: "A smart greenhouse system that monitors temperature, humidity, and soil moisture using custom-designed enclosures and sensors. The team iterated through four enclosure revisions to get IP-rated seals right, then built a small dashboard so club members could check on the plants remotely between shifts in the makerspace.",
+                type: "text",
+                version: 1,
+              },
+            ],
+            direction: "ltr",
+            format: "",
+            indent: 0,
+            type: "paragraph",
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+      },
+    },
     image: 1,
     galleryImages: [1, 2],
     categories: [6], // Electronics
@@ -25,6 +55,36 @@ export const sampleProjects: SampleProject[] = [
     contributors: ["Sophia Nguyen", "Derek Osei", "Priya Anand"],
     description:
       "An ergonomic steering wheel designed for a student racing team, combining 3D-printed prototypes with CNC-machined components. The final version went through six rapid-prototyped iterations before the team settled on a grip profile, paddle placement, and button layout that held up through a full race weekend.",
+    content: {
+      root: {
+        type: "root",
+        direction: "ltr",
+        format: "",
+        indent: 0,
+        version: 1,
+        children: [
+          {
+            children: [
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: "An ergonomic steering wheel designed for a student racing team, combining 3D-printed prototypes with CNC-machined components. The final version went through six rapid-prototyped iterations before the team settled on a grip profile, paddle placement, and button layout that held up through a full race weekend.",
+                type: "text",
+                version: 1,
+              },
+            ],
+            direction: "ltr",
+            format: "",
+            indent: 0,
+            type: "paragraph",
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+      },
+    },
     image: 1,
     galleryImages: [1],
     categories: [3], // CNC
@@ -39,6 +99,36 @@ export const sampleProjects: SampleProject[] = [
     contributors: ["Maya Thompson", "Leo Fischer"],
     description:
       "An accessible gaming controller featuring custom 3D-printed housings and modular input mechanisms designed with input from campus disability services, so buttons, triggers, and grips can be rearranged for different hand mobility needs without any soldering.",
+    content: {
+      root: {
+        type: "root",
+        direction: "ltr",
+        format: "",
+        indent: 0,
+        version: 1,
+        children: [
+          {
+            children: [
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: "An accessible gaming controller featuring custom 3D-printed housings and modular input mechanisms designed with input from campus disability services, so buttons, triggers, and grips can be rearranged for different hand mobility needs without any soldering.",
+                type: "text",
+                version: 1,
+              },
+            ],
+            direction: "ltr",
+            format: "",
+            indent: 0,
+            type: "paragraph",
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+      },
+    },
     image: 1,
     galleryImages: [2],
     categories: [2], // 3D Printing

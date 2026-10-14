@@ -9,14 +9,16 @@ import {
 } from "react";
 import { apiClient } from "@/lib/cms/api.client";
 import {
-  endOfDay,
-  endOfWeek,
   format,
   isSameDay,
-  isSameMonth,
-  isWithinInterval,
-  startOfDay,
-  startOfWeek,
+
+  // Legacy event filtering by time
+  // endOfDay,
+  // endOfWeek,
+  // isSameMonth,
+  // isWithinInterval,
+  // startOfDay,
+  // startOfWeek,
 } from "date-fns";
 import type { Event, EventCategory } from "@/types/content";
 
@@ -85,7 +87,7 @@ export function EventsProvider({
       );
     }
     return result;
-  }, [data, currentDate, category]);
+  }, [data, category]);
 
   // search narrowing for events
   const searched = useMemo(() => {

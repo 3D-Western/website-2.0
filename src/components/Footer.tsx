@@ -1,7 +1,6 @@
 import { Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { koulen } from "@/lib/fonts";
 import { Button } from "./ui/button";
 import Logo from "./Logo";
 import FooterLinks from "./navigation/FooterLinks";

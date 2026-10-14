@@ -94,6 +94,8 @@ export type ResolvedInstagramPost = Omit<
 const BASE_URL = `${process.env.NEXT_PUBLIC_CMS_ENABLED === "true" ? process.env.NEXT_PUBLIC_BASE_URL : "/"}`;
 
 const buildURL = (route: string | null = ""): string => {
+  // Missing media must stay empty so image render guards can skip it.
+  if (!route?.trim()) return "/";
   if (process.env.NEXT_PUBLIC_CMS_ENABLED === "false") return route ?? "";
   return `${BASE_URL}${route}`;
 };
@@ -134,8 +136,8 @@ export const transformEvent = (doc: ResolvedEvent): Event => {
     id: doc.id,
     title: doc.title,
     image: {
-      src: buildURL(doc.image.url),
-      alt: doc.image.alt,
+      src: buildURL(doc.image?.url),
+      alt: doc.image?.alt ?? doc.title,
     },
     description: doc.description,
     schedule: {
@@ -188,8 +190,8 @@ export const transformSponsor = (doc: ResolvedSponsor): Sponsor => {
     id: doc.id,
     name: doc.name,
     logo: {
-      url: buildURL(doc.logo.url),
-      alt: doc.logo.alt,
+      url: buildURL(doc.logo?.url),
+      alt: doc.logo?.alt ?? doc.name,
     },
     website: doc.website || "",
   };
@@ -216,8 +218,8 @@ export const transformBlog = (doc: ResolvedBlogPost): BlogPost => {
     date: doc.date,
     readingTime: doc.readingTime || undefined,
     coverImage: {
-      url: buildURL(doc.coverImage.url),
-      alt: doc.coverImage.alt,
+      url: buildURL(doc.coverImage?.url),
+      alt: doc.coverImage?.alt ?? doc.title,
     },
     tags:
       doc.tags?.map((tag) => ({
@@ -239,8 +241,8 @@ export const transformAuthor = (doc: ResolvedAuthor): Author => {
     id: doc.id,
     name: doc.name,
     avatar: {
-      url: buildURL(doc.avatar.url),
-      alt: doc.avatar.alt,
+      url: buildURL(doc.avatar?.url),
+      alt: doc.avatar?.alt ?? doc.name,
     },
   };
 };
@@ -257,14 +259,15 @@ export const transformProject = (doc: ResolvedProject): Project => {
     title: doc.title,
     creator: doc.creator,
     image: {
-      url: buildURL(doc.image.url),
-      alt: doc.image.alt,
+      url: buildURL(doc.image?.url),
+      alt: doc.image?.alt ?? doc.title,
     },
     contributors: doc.contributors || undefined,
     description: doc.description,
+    content: doc.content,
     galleryImages: doc.galleryImages?.map((image) => ({
-      url: buildURL(image.url),
-      alt: image.alt,
+      url: buildURL(image?.url),
+      alt: image?.alt ?? doc.title,
     })),
     categories: doc.categories || [],
     dateAdded: doc.createdAt,
@@ -349,8 +352,8 @@ export const transformSpotlight = (doc: ResolvedSpotlight): Spotlight => {
     description: doc.description,
     tags: doc.tags ?? [],
     image: {
-      url: buildURL(doc.image.url),
-      alt: doc.image.alt,
+      url: buildURL(doc.image?.url),
+      alt: doc.image?.alt ?? doc.name,
     },
     program: doc.program,
     year: doc.year,
@@ -384,13 +387,13 @@ export const transformInstagramPost = (
   avatar: doc.avatar
     ? {
         url: buildURL(doc.avatar?.url),
-        alt: doc.avatar?.alt,
+        alt: doc.avatar?.alt ?? doc.username,
       }
     : undefined,
   image: doc.postImage
     ? {
         url: buildURL(doc.postImage?.url),
-        alt: doc.postImage?.alt,
+        alt: doc.postImage?.alt ?? `Instagram post by ${doc.username}`,
       }
     : undefined,
   caption: doc.caption ?? undefined,

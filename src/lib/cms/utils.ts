@@ -10,13 +10,10 @@ export const CMSEnabled = (): boolean => {
 export const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-export const cmsEnabledFallback = async (
-  path: string,
-  options?: RequestInit,
-) => {
+export const cmsEnabledFallback = async (path: string) => {
   if (process.env.NEXT_PUBLIC_CMS_ENABLED === "false") {
     const { getMockResponse } = await import("@/mocks/handlers-direct");
-    const res = await getMockResponse(path, options);
+    const res = await getMockResponse(path);
     if (!res.ok) throw new Error(`Mock CMS request failed: ${res.status}`);
     const resolved = await res.json();
     if (!resolved) return { status: "not-found", response: resolved };

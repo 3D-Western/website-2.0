@@ -79,7 +79,6 @@ export default buildConfig({
     pool: {
       connectionString: process.env.CMS_DATABASE_URI,
     },
-    push: false,
   }),
   routes: {
     admin: "/admin",

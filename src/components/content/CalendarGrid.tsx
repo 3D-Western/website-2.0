@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { koulen } from "@/lib/fonts";
 import { categoryStyles } from "./EventCard";
 import {
   getMonthMatrix,

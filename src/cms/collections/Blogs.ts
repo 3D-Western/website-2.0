@@ -1,6 +1,6 @@
 // Blogs collection
 import type { CollectionConfig } from "payload";
-import { generalAccess, hasCollectionAccess } from "../access/collectionAccess";
+import { generalAccess } from "../access/collectionAccess";
 
 const BLOG_SLUG = "blogs";
 

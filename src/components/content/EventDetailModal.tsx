@@ -10,7 +10,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, MapPin, Users, ExternalLink } from "lucide-react";
+import { Calendar, Clock, MapPin, ExternalLink } from "lucide-react";
 import { categoryStyles } from "./EventCard";
 import { formatDayLabel, formatTime, parseEventDate } from "./calendarUtils";
 import { cn } from "../ui/utils";
@@ -115,7 +115,7 @@ export function EventDetailModal({
             <Button variant="outlined">Close</Button>
           </DialogClose>
           {event.url && (
-            <Button variant="gradient" asChild >
+            <Button variant="gradient" asChild>
               <a href={event.url} target="_blank" rel="noopener noreferrer">
                 Event Link
                 <ExternalLink

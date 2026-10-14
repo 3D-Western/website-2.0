@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { Badge } from "../ui/badge";
-import { PenTool, Boxes, Cog, FlaskConical, Sparkles } from "lucide-react";
+import { PenTool, Boxes, Cog, FlaskConical } from "lucide-react";
 
 const processSteps = [
 	{ label: "Concept", icon: PenTool },

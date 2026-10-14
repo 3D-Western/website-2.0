@@ -10,6 +10,7 @@ import { ProjectGallery } from "@/components/content/ProjectGallery";
 import ProjectShowcaseCard from "@/components/content/ProjectShowcaseCard";
 import { RelatedItemsSection } from "@/components/content/RelatedItemsSection";
 import { formatLongDate } from "../utils";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 
 type ProjectDetailPageProps = {
   project: Project | null;
@@ -112,9 +113,9 @@ export function ProjectDetailPage({
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col gap-10"
           >
-            <p className="text-lg text-secondary-text leading-relaxed">
-              {project.description}
-            </p>
+            <div className="text-lg text-secondary-text leading-relaxed">
+              <RichText data={project.content} />
+            </div>
 
             {(project.github || project.blogUrl) && (
               <div className="flex flex-wrap gap-3">
@@ -154,7 +155,11 @@ export function ProjectDetailPage({
         <RelatedItemsSection title="More Projects">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {related.map((p) => (
-              <ProjectShowcaseCard key={p.id} project={p} className="bg-grey-bg" />
+              <ProjectShowcaseCard
+                key={p.id}
+                project={p}
+                className="bg-grey-bg"
+              />
             ))}
           </div>
         </RelatedItemsSection>

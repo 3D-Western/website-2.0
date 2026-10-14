@@ -1,5 +1,7 @@
 # Creating a Payload Collection
 
+See the [Payload collection architecture diagram](payload-collections-architecture.md) for the existing collections, relationships, and access conventions.
+
 This is a from-scratch guide to defining a new collection in Payload for this project. It assumes no prior Payload knowledge. Once your collection exists, see `cms-collections-guide.md` for how to wire it into our app's fetching layer (`collections.ts`, `transform.ts`, overrides).
 
 ---

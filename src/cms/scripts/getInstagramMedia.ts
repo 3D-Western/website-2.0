@@ -321,8 +321,8 @@ export async function syncInstagramPosts() {
   return { profile, posts };
 }
 
-async function test() {
-  const { profile, posts } = await syncInstagramPosts();
-  console.log(profile);
-  console.log(posts);
-}
+// async function test() {
+//   const { profile, posts } = await syncInstagramPosts();
+//   console.log(profile);
+//   console.log(posts);
+// }

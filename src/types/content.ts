@@ -51,6 +51,7 @@ export type Author = {
 
 export type CoverImage = Image & {};
 
+// BLOG CATEGORIES
 export type Tag = {
   id: number;
   title: string;
@@ -101,6 +102,7 @@ export type Project = {
   creator: string;
   contributors?: string[];
   description: string;
+  content: DefaultTypedEditorState;
   image: ProjectImage;
   galleryImages?: ProjectImage[];
   categories: ProjectCategory[];

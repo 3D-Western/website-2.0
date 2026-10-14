@@ -18,7 +18,7 @@ const routeResolvers: Record<string, Resolver> = {
   "/api/instagram-posts": () => resolvers.resolveInstaPosts(),
 };
 
-export async function getMockResponse(path: string, options: RequestInit = {}) {
+export async function getMockResponse(path: string) {
   const url = new URL(path, "http://localhost:3000"); // dummy base, only path/query matter
   const resolver = routeResolvers[url.pathname];
 

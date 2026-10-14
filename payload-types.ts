@@ -425,6 +425,21 @@ export interface Project {
   creator: string;
   contributors?: string[] | null;
   description: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   image: number | CoverImage;
   galleryImages: (number | GalleryImage)[];
   categories: (number | ProjectCategory)[];
@@ -1007,6 +1022,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   creator?: T;
   contributors?: T;
   description?: T;
+  content?: T;
   image?: T;
   galleryImages?: T;
   categories?: T;

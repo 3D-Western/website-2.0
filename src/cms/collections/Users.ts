@@ -9,10 +9,7 @@ const adminOnlyUpdate = {
   update: ({ req }: { req: any }) => req.user?.role === "admin",
 };
 
-const validatePassword: CollectionBeforeValidateHook = ({
-  data,
-  operation,
-}) => {
+const validatePassword: CollectionBeforeValidateHook = ({ data }) => {
   const password = data?.password;
 
   // only enforce on create/when a new password is actually being set

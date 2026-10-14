@@ -4,7 +4,6 @@ import { useLoading } from "@/context/LoadingContext";
 import { useState, useEffect, useCallback } from "react";
 import { X, ChevronDown } from "lucide-react";
 import dynamic from "next/dynamic";
-import { HorizontalNav } from "@/components/HorizontalNav";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMenu } from "@/context/MenuContext";
 import { koulen } from "@/lib/fonts";

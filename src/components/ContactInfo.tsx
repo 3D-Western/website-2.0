@@ -1,6 +1,5 @@
 import { Mail, MapPin } from "lucide-react";
 import FooterSecton from "./footer/FooterSection";
-import Link from "next/link";
 
 export default function ContactInfo() {
   return (

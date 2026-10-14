@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import { LoadingWrapper } from "@/components/LoadingWrapper";
 import HomePage from "@/components/pages/HomePage";
 
