@@ -7,12 +7,15 @@ import { render, screen } from "@testing-library/react";
 import { BlogCard, BlogCardSkeleton } from "@/components/content/BlogCard";
 import type { BlogPost } from "@/types/content";
 
-vi.mock("next/image", () => ({
-  __esModule: true,
-  default: ({ src, alt }: { src: string; alt: string }) => (
-    <img src={src} alt={alt} />
-  ),
-}));
+vi.mock("next/image", async (importOriginal) => {
+  const { default: Image } = await importOriginal<typeof import("next/image")>();
+  return {
+    default: (props: React.ComponentProps<typeof Image>) => (
+      // Keep original URLs for assertions without the Next.js image optimizer.
+      <Image {...props} alt={props.alt} unoptimized />
+    ),
+  };
+});
 
 vi.mock("next/link", () => ({
   __esModule: true,

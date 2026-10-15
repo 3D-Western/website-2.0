@@ -1,4 +1,5 @@
 import { getPayload } from "payload";
+import type { DataFromCollectionSlug, RequiredDataFromCollectionSlug } from "payload";
 import config from "@payload-config";
 
 const ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN!; // long-lived token, ~60 day expiry
@@ -107,11 +108,13 @@ async function getMediaDetails(mediaId: string): Promise<InstagramMedia> {
 const payload = await getPayload({ config });
 
 // Generic upsert type
-interface UpsertOptions<TData extends Record<string, unknown>> {
-  collection: string;
-  matchField: string;
+type InstagramCollection = "avatars" | "instagram-thumbnails" | "instagram-posts";
+
+interface UpsertOptions<TSlug extends InstagramCollection> {
+  collection: TSlug;
+  matchField: keyof DataFromCollectionSlug<TSlug> & string;
   matchValue: string | number;
-  data: TData;
+  data: RequiredDataFromCollectionSlug<TSlug>;
   file?: {
     data: Buffer;
     mimetype: string;
@@ -122,7 +125,11 @@ interface UpsertOptions<TData extends Record<string, unknown>> {
   logLabel?: string;
 }
 
-async function upsert<TData extends Record<string, unknown>>({
+type InstagramUpsertOptions = {
+  [TSlug in InstagramCollection]: UpsertOptions<TSlug>;
+}[InstagramCollection];
+
+async function upsert({
   collection,
   matchField,
   matchValue,
@@ -130,30 +137,30 @@ async function upsert<TData extends Record<string, unknown>>({
   file,
   draft = false,
   logLabel = collection,
-}: UpsertOptions<TData>): Promise<number> {
+}: InstagramUpsertOptions): Promise<number> {
   const existing = await payload.find({
-    collection: collection as any,
+    collection: collection,
     where: { [matchField]: { equals: matchValue } },
     limit: 1,
   });
 
   if (existing.docs.length > 0) {
     const updated = await payload.update({
-      collection: collection as any,
+      collection: collection,
       id: existing.docs[0].id,
       draft,
       ...(file && { file }),
-      data: data as any,
+      data: data,
     });
     console.log(`\tUpdated ${logLabel}:`, matchValue);
     return updated.id;
   }
 
   const created = await payload.create({
-    collection: collection as any,
+    collection: collection,
     ...(draft !== undefined && { draft }),
     ...(file && { file }),
-    data: data as any,
+    data: data,
   });
   console.log(`\tCreated ${logLabel}:`, matchValue);
   return created.id;
@@ -306,11 +313,11 @@ export async function syncInstagramPosts() {
   }
 
   // Shorten ids so payload can store
-  let newProfile = {
+  const newProfile = {
     ...profile,
     user_id: profile.user_id.slice(0, 5),
   };
-  let newPosts = posts.map((post) => ({
+  const newPosts = posts.map((post) => ({
     ...post,
     id: post.id.slice(0, 5),
   }));

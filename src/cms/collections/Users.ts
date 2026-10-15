@@ -1,4 +1,5 @@
 import {
+  PayloadRequest,
   ValidationError,
   type CollectionBeforeValidateHook,
   type CollectionConfig,
@@ -6,7 +7,7 @@ import {
 import { assignableCollections } from "../access/collectionAccess";
 
 const adminOnlyUpdate = {
-  update: ({ req }: { req: any }) => req.user?.role === "admin",
+  update: ({ req }: { req: PayloadRequest }) => req.user?.role === "admin",
 };
 
 const validatePassword: CollectionBeforeValidateHook = ({ data }) => {

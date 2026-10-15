@@ -39,7 +39,7 @@ export const hasCollectionAccess = (slug: AssignableCollection): Access => {
 //   this returned query constraint instead of a plain true/false — meaning
 //   public visitors can only read documents where _status equals "published".
 export const generalAccess = (slug: AssignableCollection) => ({
-  read: (({ req }) => {
+  read: (() => {
     // logged-in editors/admins with access see everything (including drafts);
     // public/unauthenticated visitors only see published docs
     // if (req.user) return true;
