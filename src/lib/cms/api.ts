@@ -14,13 +14,23 @@ export type Fetcher = (
   qs: string,
 ) => Promise<{ docs: unknown[] }>;
 
+type QueryOptions = {
+  limit?: number;
+  page?: number;
+  ids?: number[];
+  category?: string;
+  start?: Date;
+  end?: Date;
+};
+
+// Unsupported capabilities contribute unknown, which adds no intersection constraints.
 // options for the api, passed to buildApi
 type OptionsFor<C extends CollectionConfig> = {
   limit?: number;
   page?: number;
   ids?: number[];
-} & (C["categoryField"] extends string ? { category?: string } : {}) &
-  (C["dateField"] extends string ? { start?: Date; end?: Date } : {});
+} & (C["categoryField"] extends string ? { category?: string } : unknown) &
+  (C["dateField"] extends string ? { start?: Date; end?: Date } : unknown);
 
 // type of date helper methods, potentially empty if the collection has no date fields
 type DateHelpers<C extends CollectionConfig> = C["dateField"] extends string
@@ -38,7 +48,7 @@ type DateHelpers<C extends CollectionConfig> = C["dateField"] extends string
         o?: Omit<OptionsFor<C>, "start" | "end">,
       ) => Promise<ReturnType<C["transform"]>>;
     }
-  : {};
+  : unknown;
 
 // return type for the api that is built when buildApi is called
 type Api<C extends CollectionConfig> = {
@@ -60,10 +70,12 @@ export function buildApi<C extends CollectionConfig>(
   config: C,
   fetch: Fetcher,
 ): Api<C> {
-  const getMany = async (options?: OptionsFor<C>) => {
+  // Internally accept the complete option shape; Api<C> restricts callers to
+  // the capabilities declared by their collection.
+  const getMany = async (options: QueryOptions = {}) => {
     // set params for fetch
     const params = new URLSearchParams();
-    const opts = (options ?? {}) as Record<string, any>;
+    const opts = options;
 
     if (opts.limit) params.set("limit", String(opts.limit));
     if (opts.page) params.set("page", String(opts.page));
@@ -80,11 +92,11 @@ export function buildApi<C extends CollectionConfig>(
     if (hasDateField(config) && opts.start && opts.end) {
       params.set(
         `where[${config.dateField}][greater_than_equal]`,
-        (opts.start as Date).toISOString(),
+        opts.start.toISOString(),
       );
       params.set(
         `where[${config.dateField}][less_than_equal]`,
-        (opts.end as Date).toISOString(),
+        opts.end.toISOString(),
       );
       params.set("sort", config.dateField);
     }
@@ -94,17 +106,19 @@ export function buildApi<C extends CollectionConfig>(
 
     // fetch and return
     const result = await fetch(config.slug, params.toString());
-    return config.transform(result.docs);
+    // Payload/REST responses are trusted to match this collection at depth 2.
+    // This assertion describes that boundary; it is not runtime validation.
+    return config.transform(result.docs as Parameters<C["transform"]>[0]);
   };
 
   // helper methods for getting by day for collections that have dates (events)
   const dateHelpers = hasDateField(config)
     ? {
-        getByDay: (day: Date, o?: any) =>
+        getByDay: (day: Date, o?: Omit<QueryOptions, "start" | "end">) =>
           getMany({ ...o, start: startOfDay(day), end: endOfDay(day) }),
-        getByWeek: (day: Date, o?: any) =>
+        getByWeek: (day: Date, o?: Omit<QueryOptions, "start" | "end">) =>
           getMany({ ...o, start: startOfWeek(day), end: endOfWeek(day) }),
-        getByMonth: (day: Date, o?: any) =>
+        getByMonth: (day: Date, o?: Omit<QueryOptions, "start" | "end">) =>
           getMany({ ...o, start: startOfMonth(day), end: endOfMonth(day) }),
       }
     : {};

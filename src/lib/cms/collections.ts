@@ -13,7 +13,9 @@ import {
   transformInstagramPosts,
 } from "@/lib/cms/transform";
 
-export type CollectionConfig<TDoc = any, TOut = any> = {
+// The registry accepts transforms with different document types. `never` is
+// only the input constraint; each entry retains its concrete transform signature.
+export type CollectionConfig<TDoc = never, TOut = unknown> = {
   slug: string;
   transform: (docs: TDoc[]) => TOut[];
   dateField?: string;
